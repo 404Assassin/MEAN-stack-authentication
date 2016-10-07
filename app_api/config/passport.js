@@ -3,6 +3,9 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
+// Use bluebird
+mongoose.Promise = require('bluebird');
+
 passport.use(new LocalStrategy({
     usernameField: 'email'
   },
@@ -12,13 +15,13 @@ passport.use(new LocalStrategy({
       // Return if user not found in database
       if (!user) {
         return done(null, false, {
-          message: 'User not found'
+          message: 'I have know idea who you are'
         });
       }
       // Return if password is wrong
       if (!user.validPassword(password)) {
         return done(null, false, {
-          message: 'Password is wrong'
+          message: 'your password is all messed up'
         });
       }
       // If credentials are correct, return the user object
