@@ -25,12 +25,13 @@ var routesApi = require('./app_api/routes/index');
 
 var app = express();
 
-console.log(
-    '\n:::::::::::::::::::::::::::::::::::::: env var :::::::::::::::::::::::::::::::::::::::::::::::::::',
-    '\n::process.env::'+ process.env,
-    '\n::process.env.IT_IS_A_SECRET::'+ process.env.IT_IS_A_SECRET,
-    '\n::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-)
+// console.log(
+//     '\n:::::::::::::::::::::::::::::::::::::: env var :::::::::::::::::::::::::::::::::::::::::::::::::::',
+//     '\n::process::'+ process,
+//     '\n::process.env::'+ process.env,
+//     '\n::process.env.IT_IS_A_SECRET::'+ process.env.IT_IS_A_SECRET,
+//     '\n::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+// )
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

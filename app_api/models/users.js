@@ -1,13 +1,11 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
-var localPF = process.env.IT_IS_A_SECRET;
-console.log(
-    '\n:::::::::::::::::::::::::::::::::::::: env var :::::::::::::::::::::::::::::::::::::::::::::::::::',
-    '\n::process.env.IT_IS_A_SECRET::'+ localPF,
-    '\n::process.env.IT_IS_A_SECRET::'+ process.env.IT_IS_A_SECRET,
-    '\n::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
-)
+// console.log(
+//     '\n:::::::::::::::::::::::::::::::::::::: env var :::::::::::::::::::::::::::::::::::::::::::::::::::',
+//     '\n::process.env.IT_IS_A_SECRET::'+ process.env.IT_IS_A_SECRET,
+//     '\n::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+// )
 var userSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -32,15 +30,20 @@ userSchema.methods.validPassword = function (password) {
 userSchema.methods.generateJwt = function () {
     var expiry = new Date();
     expiry.setDate(expiry.getDate() + 7);
+console.log(
+    '\n:::::::::::::::::::::::::::::::::::::: expiry :::::::::::::::::::::::::::::::::::::::::::::::::::',
+    '\n::expiry::'+ expiry,
+    '\n::expiry.getDate()::'+ expiry.getDate(),
+    '\n::expiry.setDate(expiry.getDate() + 7)::'+ expiry.setDate(expiry.getDate() + 7),
+    '\n::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::'
+)
     return jwt.sign({
             _id: this._id,
             email: this.email,
             name: this.name,
             exp: parseInt(expiry.getTime() / 1000),
         },
-        // DO NOT KEEP YOUR SECRET IN THE CODE!
-        "keyboard cat"
-        // process.env.IT_IS_A_SECRET);
+        process.env.IT_IS_A_SECRET
     );
 };
 mongoose.model('User', userSchema);
